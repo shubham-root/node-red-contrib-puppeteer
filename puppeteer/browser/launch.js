@@ -11,8 +11,11 @@ module.exports = function (RED) {
 
     // Retrieve the config node
     this.on('input', function (msg) {
-      puppeteer.launch( { headless: node.headless, slowMo: node.slowMo } )
-        .then((browser) => {
+      puppeteer.launch( { 
+              headless: node.headless, 
+              slowMo: node.slowMo, 
+              args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'] 
+          }).then((browser) => {
           msg.puppeteer = {
             browser
           }
